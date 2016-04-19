@@ -2,9 +2,9 @@
 public class Execute {
 
 	
-	char [] abertura = {'(','[','{'};
-	char [] fechamento = {')',']','}'};
-	String estruturais = "()[]{}";
+	static char [] abertura = {'(','[','{'};
+	static char [] fechamento = {')',']','}'};
+	static String estruturais = "()[]{}";
 			
 	public void execute()
 	{
@@ -18,16 +18,16 @@ public class Execute {
 		Execute exec = new Execute();
 		
 		// teste 1 - OK
-		exec.testar("([{a}])");
+		exec.validar("([{a}])");
 		
 		
 		//teste 2 - Erro
-		exec.testar("((((a){{{b,c{([abc)]}");
+		exec.validar("((((a){{{b,c{([abc)]}");
 		
 
 	}
 	
-	public void testar(String palavra) 
+	public void validar(String palavra) 
 	{
 		if (validarPalavra(palavra))
 			System.out.println("OK A palavra = " + palavra + " esta bem formada!");
@@ -45,7 +45,7 @@ public class Execute {
 		{
 			for (int i = 0; i < palavra.length(); i++)
 			{
-				level += validateCaracter(palavra.charAt(i),level,i);
+				level += validarCaracter(palavra.charAt(i),level,i);
 			}
 		}
 		catch (Exception e)
@@ -57,10 +57,10 @@ public class Execute {
 	}
 	
 	
-	public int validateCaracter(char caracter,int level,int posicao) throws Exception
+	public int validarCaracter(char caracter,int level,int posicao) throws Exception
 	{
 		
-        if (bEstrutural(caracter))
+        if (isEstrutural(caracter))
         {
         	// é um caracter de abertura correto para este nivel?
     		if (level < abertura.length && abertura[level] == caracter)
@@ -71,7 +71,7 @@ public class Execute {
     		if (level > 0 && fechamento[level-1] == caracter)
     	       return -1;
 
-    		if (bEstruturalProibido(caracter,level))
+    		if (isEstruturalProibido(caracter,level))
     		{
     			// lança erro se caracter proibido para este nivel
     			throw new Exception("Palavra Mal Formada!");
@@ -83,7 +83,7 @@ public class Execute {
 	}
 	
 
-	public boolean bEstrutural(char caracter) throws Exception
+	public boolean isEstrutural(char caracter) throws Exception
 	{
 		for (int i = 0; i < estruturais.length(); i++)
 		{
@@ -94,7 +94,7 @@ public class Execute {
         return false;		
 	}
 
-	public boolean bEstruturalProibido(char caracter,int level) throws Exception
+	public boolean isEstruturalProibido(char caracter,int level) throws Exception
 	{
 		// é um caracter de abertura proibido para esta posição e nivel?
 		for (int i = 0; i < abertura.length; i++)
