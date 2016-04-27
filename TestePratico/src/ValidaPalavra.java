@@ -1,38 +1,25 @@
 
-public class Execute {
+public class ValidaPalavra {
 
 	
 	static char [] abertura = {'(','[','{'};
 	static char [] fechamento = {')',']','}'};
 	static String estruturais = "()[]{}";
 			
-	public void execute()
-	{
-		
-	}
-	
-	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-		Execute exec = new Execute();
-		
-		// teste 1 - OK
-		exec.validar("([{a}])");
-		
-		
-		//teste 2 - Erro
-		exec.validar("((((a){{{b,c{([abc)]}");
-		
-
-	}
-	
-	public void validar(String palavra) 
+	public boolean validar(String palavra) 
 	{
-		if (validarPalavra(palavra))
-			System.out.println("OK A palavra = " + palavra + " esta bem formada!");
-		else			
-			System.out.println("A palavra = " + palavra + " esta mal formada!");
+		boolean ok;
+		if (validarPalavra(palavra)){
+			System.out.println("OK: A palavra = " + palavra + " esta bem formada!");
+			ok = true;
+		}
+		else	
+		{
+			System.out.println("Erro: A palavra = " + palavra + " esta mal formada!");
+			ok = false;
+		}
+		return ok;
 	}
 	
 	
